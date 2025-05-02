@@ -20,8 +20,6 @@ export default function Home() {
           <li>Save and see your changes instantly.</li>
         </ol>
 
-        aaaaaaaaa２２２２
-
         <div className={styles.ctas}>
           <a
             className={styles.primary}
