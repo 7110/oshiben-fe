@@ -1,0 +1,37 @@
+.Textarea {
+  width: 100%;
+  padding: 2px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(100, 100, 100, 0.8);
+
+  .Textarea__text {
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 14px;
+    color: #fff;
+    border: 0;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #fff;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .Textarea__submit {
+    width: 40px;
+    height: 40px;
+    margin-top: auto;
+    margin-left: 8px;
+    border: none;
+    border-radius: 20px;
+    flex-shrink: 0;
+    background-color: rgba(123, 219, 224, 1);
+    cursor: pointer;
+  }
+}

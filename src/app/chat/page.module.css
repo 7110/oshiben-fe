@@ -18,4 +18,8 @@
 
   .chat__messages {
   }
+
+  .chat__textarea {
+    margin-top: 20px;
+  }
 }
