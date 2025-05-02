@@ -1,25 +1,27 @@
 import React from 'react';
 
-import styles from "./index.module.css";
+import { MessageType } from '@/domain/Message';
 
-export default function Messages() { 
-    return (
-        <div className={styles.Messages}>
-            <div className={styles.Messages__item}>
-                <div className={styles.Messages__item__avatar}></div>
-                <div className={styles.Messages__item__content}>
-                    <div className={styles.Messages__item__content__text}>Hello, how can I help you?</div>
-                    <div className={styles.Messages__item__content__time}>10:00 AM</div>
-                </div>
-            </div>
-            <div className={styles.Messages__item}>
-                <div className={styles.Messages__item__avatar}></div>
-                <div className={styles.Messages__item__content}>
-                    <div className={styles.Messages__item__content__text}>I have a question about your product.</div>
-                    <div className={styles.Messages__item__content__time}>10:01 AM</div>
-                </div>
-            </div>
+import styles from './index.module.css';
+
+type MessagesProps = {
+  messages: MessageType[];
+
+  className?: string;
+};
+
+export default function Messages({ messages, className }: MessagesProps) {
+  return (
+    <div className={[styles.Messages, className].join(' ')}>
+      {messages.map((message, index) => (
+        <div key={index} className={styles.Messages__message}>
+          <p
+            className={`${styles.Messages__text} ${message.type === 'ai' ? styles['Messages__text--ai'] : styles['Messages__text--human']}`}
+          >
+            {message.message}
+          </p>
         </div>
-    );
-
+      ))}
+    </div>
+  );
 }
