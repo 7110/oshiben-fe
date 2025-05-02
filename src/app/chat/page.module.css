@@ -1,7 +1,19 @@
-.ChatPage {
-    width: 100vh;
-    max-width: 520px;
-    height: 100vh;
-    margin: 0 auto;
-    background-size: cover;
+.chat {
+  width: 100vh;
+  max-width: 520px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  background-size: cover;
+
+  .chat__bottom {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .chat__messages {
+  }
 }
