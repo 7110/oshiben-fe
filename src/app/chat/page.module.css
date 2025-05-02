@@ -1,0 +1,7 @@
+.ChatPage {
+    width: 100vh;
+    max-width: 520px;
+    height: 100vh;
+    margin: 0 auto;
+    background-size: cover;
+}
