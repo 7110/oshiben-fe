@@ -20,6 +20,8 @@ export default function Messages({ messages, className }: MessagesProps) {
           >
             {message.message}
           </p>
+
+          {message.tips && <p className={styles.Messages__tips}>{message.tips}</p>}
         </div>
       ))}
     </div>

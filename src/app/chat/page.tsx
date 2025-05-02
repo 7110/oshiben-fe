@@ -54,6 +54,7 @@ export default function Chat() {
     {
       message: 'Sure, can you provide me with your order number?',
       type: 'ai',
+      tips: 'This is a tipThis is a tipThis is a tipThis is a tipThis is a tipThis is a tipThis is a tip',
     },
     {
       message: 'My order number is 12345.',

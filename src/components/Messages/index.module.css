@@ -5,33 +5,41 @@
 
   .Messages__message {
     display: flex;
+    flex-direction: column;
 
     & + & {
       margin-top: 12px;
     }
   }
 
-  .Messages__text {
+  .Messages__text,
+  .Messages__tips {
     max-width: 60%;
     padding: 4px 8px;
     line-height: 1.4;
     font-size: 16px;
-    font-weight: bold;
     word-break: break-word;
     display: inline-block;
-    border-radius: 12px;
-    position: relative;
   }
 
   .Messages__text--ai {
-    margin-left: auto;
-    background-color: rgba(123, 219, 224, 0.8);
-    border-top-right-radius: 0;
+    margin-right: auto;
+    font-weight: bold;
+    background-color: rgba(247, 170, 224, 0.8);
+    border-radius: 12px;
+    border-top-left-radius: 0;
   }
 
   .Messages__text--human {
-    margin-right: auto;
-    background-color: rgba(247, 170, 224, 0.8);
+    margin-left: auto;
+    font-weight: bold;
+    background-color: rgba(123, 219, 224, 0.8);
+    border-radius: 12px;
     border-top-left-radius: 0;
+  }
+
+  .Messages__tips {
+    margin: 12px auto 0 0;
+    background-color: rgba(210, 210, 210, 1);
   }
 }
