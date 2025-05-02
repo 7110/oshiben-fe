@@ -39,6 +39,14 @@
     border-top-right-radius: 0;
   }
 
+  .Messages__translation {
+    margin-top: 4px;
+    padding-top: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    display: inline-block;
+  }
+
   .Messages__tips {
     margin: 12px auto 0 0;
     background-color: rgba(210, 210, 210, 1);

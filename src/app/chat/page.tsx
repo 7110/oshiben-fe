@@ -34,7 +34,16 @@ export default function Chat() {
 
       const data = await res.json();
 
-      setMessages((prev) => [...prev, { message: data.message, role: 'system', tips: data.tips }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          message: data.message,
+          role: 'system',
+          tips: data.tips,
+          japaneseTranslation: data.japanese_translation,
+          knowledge: data.knowledge,
+        },
+      ]);
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
