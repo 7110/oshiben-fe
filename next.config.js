@@ -8,7 +8,7 @@ const nextConfig = {
   },
   assetPrefix: isProd ? '/oshiben-fe/' : '',
   basePath: isProd ? '/oshiben-fe' : '',
-  output: 'export'
+  output: 'export',
 };
 
 module.exports = nextConfig;
