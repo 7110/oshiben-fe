@@ -16,12 +16,14 @@ export default function Messages({ messages, className }: MessagesProps) {
       {messages.map((message, index) => (
         <div key={index} className={styles.Messages__message}>
           <p
-            className={`${styles.Messages__text} ${message.type === 'ai' ? styles['Messages__text--ai'] : styles['Messages__text--human']}`}
+            className={`${styles.Messages__text} ${message.role === 'system' ? styles['Messages__text--ai'] : styles['Messages__text--human']}`}
           >
             {message.message}
           </p>
 
-          {message.tips && <p className={styles.Messages__tips}>{message.tips}</p>}
+          {message.tips && message.role === 'system' && (
+            <p className={styles.Messages__tips}>{message.tips}</p>
+          )}
         </div>
       ))}
     </div>

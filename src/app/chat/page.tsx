@@ -2,94 +2,46 @@
 
 import { useState } from 'react';
 
-import FloatingNav from '@/components/FloatingNav';
 import Messages from '@/components/Messages';
 import Textarea from '@/components/Textarea';
 
 import { MessageType } from '@/domain/Message';
+
+import { systemPrompt } from '@/prompt';
 
 import { withBasePath } from '@/utils';
 
 import styles from './page.module.css';
 
 export default function Chat() {
-  // const messages: MessageType[] = [
-  //   {
-  //     message: 'Hello, how can I help you?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'I need help with my order.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Sure, can you provide me with your order number?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'My order number is 12345.',
-  //     type: 'human',
-  //   },
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
-  //   {
-  //     message: 'Hello, how can I help you?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'I need help with my order.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Sure, can you provide me with your order number?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'My order number is 12345.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Hello, how can I help you?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'I need help with my order.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Sure, can you provide me with your order number?',
-  //     type: 'ai',
-  //     tips: 'This is a tipThis is a tipThis is a tipThis is a tipThis is a tipThis is a tipThis is a tip',
-  //   },
-  //   {
-  //     message: 'My order number is 12345.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Hello, how can I help you?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'I need help with my order.',
-  //     type: 'human',
-  //   },
-  //   {
-  //     message: 'Sure, can you provide me with your order number?',
-  //     type: 'ai',
-  //   },
-  //   {
-  //     message: 'My order number is 12345.',
-  //     type: 'human',
-  //   },
-  // ];
+  const handleSend = async (text: string) => {
+    const nextMessages: MessageType[] = [...messages, { message: text, role: 'user' }];
+    setMessages(nextMessages);
 
-  const [messages, setMessages] = useState<MessageType[]>([
-    { message: 'Hello, how can I help you?', type: 'ai' },
-    { message: 'I need help with my order.', type: 'human' },
-  ]);
+    try {
+      const baseURL = 'https://163.44.127.243.nip.io'; // 'http://localhost:8000'
+      const res = await fetch(`${baseURL}/v1/conversation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ system_prompt: systemPrompt, messages: nextMessages }),
+      });
 
-  const handleSend = (text: string) => {
-    setMessages((prev) => [...prev, { message: text, type: 'human' }]);
-    // TODO: OpenAI APIにリクエストを投げて、AIの応答をセットする処理
+      if (!res.ok) throw new Error('APIエラー');
+
+      const data = await res.json();
+
+      setMessages((prev) => [...prev, { message: data.message, role: 'system', tips: data.tips }]);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        { message: 'サーバーエラーが発生しました。', role: 'system' },
+      ]);
+    }
   };
 
   return (
@@ -98,8 +50,6 @@ export default function Chat() {
       style={{ backgroundImage: `url(${withBasePath('/background.png')})` }}
     >
       <div className={styles.chat__bottom}>
-        <FloatingNav></FloatingNav>
-
         <Messages className={styles.chat__messages} messages={messages} />
 
         <Textarea className={styles.chat__textarea} onSend={handleSend} />
